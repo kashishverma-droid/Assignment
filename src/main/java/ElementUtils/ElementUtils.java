@@ -20,8 +20,7 @@ public class ElementUtils {
 
         if (elements.size() > 1) {
             throw new TooManyElementsException(
-                    "Expected ONE element but found " + elements.size() + " elements for locator: " + locator
-            );
+                    "Expected ONE element but found " + elements.size() + " elements for locator: " + locator);
         }
 
         return elements.get(0);

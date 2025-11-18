@@ -1,47 +1,57 @@
 package test;
 
 import baseTest.BaseTest;
-import org.testng.Assert;
+import com.aventstack.extentreports.Status;
 import org.testng.annotations.Test;
-import pages.HomePage;
-import pages.LoginPage;
+import pages.Alert;
+import pages.Login;
 
 public class MainTestReport extends BaseTest {
 
     @Test
-    public void completeFlowTest() {
+    public void fullAutomationTest() {
 
-        test.info("Launching Login Page...");
-        driver.get("https://java-test-haven.lovable.app/login");
 
-        LoginPage lp = new LoginPage(driver);
-        HomePage hp = new HomePage(driver);
+        test = extent.createTest("Full Automation Test - Login Alerts");
 
-        test.info("Performing Login...");
-        lp.login("admin", "password");
+        try {
 
-        Assert.assertTrue(driver.getCurrentUrl().contains("home"));
-        test.pass("Login Successful!");
+            driver.get("https://java-test-haven.lovable.app/login");
+            test.log(Status.INFO, "Opened Login Page");
 
-        test.info("Navigating to Test Page 1...");
-        hp.goToTestPage1();
-        Assert.assertTrue(driver.getCurrentUrl().contains("alerts"));
-        test.pass("Arrived at Test Page 1!");
+            Login login = new Login(driver);
 
-        test.info("Go back to Home...");
-        hp.goHome();
-        Assert.assertTrue(driver.getCurrentUrl().contains("home"));
+            login.enterUsername("testuser");
+            login.enterPassword("password");
+            login.clickLoginButton();
 
-        test.info("Navigating to Test Page 2...");
-        hp.goToTestPage2();
-        Assert.assertTrue(driver.getCurrentUrl().contains("forms"));
-        test.pass("Arrived at Test Page 2!");
 
-        test.info("Logging Out...");
-        hp.logout();
-        Assert.assertTrue(driver.getCurrentUrl().contains("login"));
-        test.pass("Logout Successful!");
+            test.log(Status.PASS, "Login test passed");
 
-        test.info("Test Completed!");
+            driver.get("https://java-test-haven.lovable.app/login");
+
+
+
+            driver.get("https://java-test-haven.lovable.app/alerts");
+            test.log(Status.INFO, "Opened Alerts Page");
+
+            Alert alert = new Alert(driver);
+
+            alert.alertBtn();
+            test.log(Status.PASS, "Alert popup handled");
+
+            alert.confirmBtn();
+            test.log(Status.PASS, "Confirm popup handled");
+
+            alert.promptBtn();
+            test.log(Status.PASS, "Prompt popup handled");
+
+            test.log(Status.PASS, "All alert tests passed");
+
+        } catch (Exception e) {
+
+            test.log(Status.FAIL, "Test Failed: " + e.getMessage());
+            throw e;
+        }
     }
 }

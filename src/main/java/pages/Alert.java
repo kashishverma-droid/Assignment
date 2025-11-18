@@ -13,7 +13,23 @@ public class Alert {
         this.driver = driver;
     }
 
-    // Your required locator:
+    public void alertBtn() {
+        driver.findElement(By.id("alert--btn")).click();
+        driver.switchTo().alert().accept();
+    }
+
+    public void confirmBtn() {
+        driver.findElement(By.id("confirm-btn")).click();
+        driver.switchTo().alert().accept();
+    }
+
+    public void promptBtn() {
+        driver.findElement(By.id("prompt-btn")).click();
+        org.openqa.selenium.Alert promptAlert = driver.switchTo().alert();
+        promptAlert.sendKeys("kashish");
+        promptAlert.accept();
+    }
+
     private By allButtons = By.xpath("//button");
 
     public WebElement getSingleButton() {

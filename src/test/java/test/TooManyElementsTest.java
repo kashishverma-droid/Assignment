@@ -11,10 +11,11 @@ public class TooManyElementsTest extends BaseTest {
     public void testTooManyButtons() {
 
         driver.get("https://java-test-haven.lovable.app/alerts");
+
         Alert page = new Alert(driver);
 
         try {
-            page.getSingleButton();  //will throw too many elements exception
+            page.getSingleButton();  // should throw TooManyElementsException
         } catch (TooManyElementsException e) {
             System.out.println("CUSTOM EXCEPTION THROWN!");
             System.out.println(e.getMessage());

@@ -14,6 +14,8 @@ public class DynamicTableTest extends BaseTest {
     public void extractTableAndWriteToExcel() {
 
         DynamicTablePage tablePage = new DynamicTablePage(driver);
+        driver.get("https://practice.expandtesting.com/dynamic-table");
+
 
         // Collect Headers
         List<String> headers = tablePage.getTableHeaders();

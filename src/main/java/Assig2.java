@@ -41,8 +41,6 @@ public class Assig2 {
             System.out.println(); // next row
         }
 
-
-
         driver.quit();
     }
 }
