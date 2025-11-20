@@ -21,10 +21,25 @@ public class BaseTest {
 
     @BeforeSuite
     public void startReport() {
-        ExtentSparkReporter spark = new ExtentSparkReporter("AutomationReport.html");
+
+
+        String reportFolder = System.getProperty("user.dir") + "/Reports/";
+        File folder = new File(reportFolder);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+        //timestamp
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
+
+        String reportPath = reportFolder + "AutomationReport_" + timestamp + ".html";
+        ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
         extent = new ExtentReports();
         extent.attachReporter(spark);
+        System.out.println("Report generated at: " + reportPath);
     }
+
 
     @BeforeClass
     public void setup() {
@@ -41,7 +56,7 @@ public class BaseTest {
 
 
         File directory = new File(folderPath);
-        if (!directory.exists()) directory.mkdirs();   // create folder automatically
+        if (!directory.exists()) directory.mkdirs();
 
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         File dest = new File(fullPath);
