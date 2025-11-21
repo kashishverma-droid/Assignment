@@ -29,16 +29,16 @@ public class TabNavigationTest extends BaseTest {
 
         driver.switchTo().window(tabs.get(0));
         System.out.println("Switched to Google");
-        Thread.sleep(1500);
+
 
 
         driver.switchTo().window(tabs.get(1));
         System.out.println("Switched to YouTube");
-        Thread.sleep(1500);
+
 
 
         driver.switchTo().window(tabs.get(2));
         System.out.println("Switched to Selenium.dev");
-        Thread.sleep(1500);
+
     }
 }
